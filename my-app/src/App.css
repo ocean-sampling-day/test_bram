@@ -36,3 +36,46 @@
     transform: rotate(360deg);
   }
 }
+
+.table_main_page {
+  background-color: #282c34;
+  color: white;
+  height: 100vh;
+}
+
+/*format tables */
+table {
+  border-collapse: collapse;
+  width: 80%;
+  margin: auto;
+}
+
+th, td {
+  text-align: left;
+  padding: 8px;
+}
+
+tr:nth-child(even){
+  background-color: #f2f2f2;
+  color: #282c34;
+}
+
+tr:nth-child(odd) > td > a {
+  color: white;
+} 
+
+tr:nth-child(even) > td > a {
+  color: #282c34;
+} 
+
+tr > td > a {
+  color: #282c34;
+} 
+
+th {
+  background-color: #4CAF50;
+  color: white;
+}
+
+/*format buttons */
+
