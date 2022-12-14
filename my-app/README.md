@@ -2,6 +2,14 @@
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
+First start by filling in the .env file with your own credentials.
+
+you can make your hashed password by running 
+
+```
+node password.js <your password>
+```
+
 ## Available Scripts
 
 In the project directory, you can run:
