@@ -9,12 +9,21 @@ const GitReposTable = () => {
     const [repos, setRepos] = useState([]);
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(false);
-
-    useEffect(() => {
-        getRepos(setLoading,setError).then((repos) => {
+    const [search, setSearch] = useState('');
+    const [searched, setSearched] = useState("");
+    //function that will search for a user or org
+    const searchUser = () => {
+        getRepos(setLoading,setError,search).then((repos) => {
             setRepos(repos);
+            setLoading(false);
+            setSearched(search);
+            setSearch('');
+        }, (error) => {
+            setError(true);
+            setLoading(false);
+            setSearch('');
         });
-    }, []);
+    }
 
     if (loading) {
         return <div>Loading...</div>;
@@ -22,12 +31,14 @@ const GitReposTable = () => {
     if (error) {
         return <div>Something went wrong...</div>;
     }
-    if (!repos || repos.length === 0) {
-        return <div>No repos found</div>;
-    }
     if (!loading && !error){
         return (
             <div className='table_main_page'>
+                <input type="text" placeholder="Search for a user or org" onChange={e => setSearch(e.target.value)} value={search}/>
+                <button onClick={e => searchUser()}>search</button>
+
+                <h1>{searched} Github Repos</h1>
+
                 <table>
                     <thead>
                         <tr>
@@ -50,4 +61,4 @@ const GitReposTable = () => {
     }
 }
 
-export default GitReposTable;
+export default GitReposTable; 
