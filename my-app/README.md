@@ -10,6 +10,8 @@ you can make your hashed password by running
 node password.js <your password>
 ```
 
+copy over the hashed password to the .env file by replacing [your hashed token here use javascript utf8_to_64 function to encode your token]  with the hashed password.
+
 ## Available Scripts
 
 In the project directory, you can run:
