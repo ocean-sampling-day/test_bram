@@ -1,8 +1,6 @@
 import { Octokit } from '@octokit/rest';
 //import env variables from .env file
-console.log(process.env.REACT_APP_HASHED_TOKEN);
 const decoded_token_a = fromBinary(process.env.REACT_APP_HASHED_TOKEN);
-console.log(decoded_token_a);
 // Create a new Octokit instance that uses axios as its HTTP client
 const octokit = new Octokit({
     auth: decoded_token_a
@@ -18,7 +16,7 @@ function fromBinary(encoded) {
 }
 
 //async funtion that will return a promise
-export async function getRepos(setLoading,setError,username) {
+export async function getRepos(username) {
     //perform axios request to get repos
     console.log(username);
     if (username != ''){
@@ -42,3 +40,28 @@ export async function getWorkflows(username,repo) {
     });
     return request_workflows.data;
 }
+
+//async function that will return the details of a workflow
+export async function getWorkflowDetails(username,repo,workflow_id) {
+    //perform axios request to get workflows
+    //return the workflows
+    const request_workflow_details = await octokit.request('GET /repos/{owner}/{repo}/actions/workflows/{workflow_id}', {
+        owner: username,
+        repo: repo,
+        workflow_id: workflow_id
+    });
+    return request_workflow_details.data;
+}
+
+//async function that will return the status of the lastest run of a workflow
+export async function getWorkflowStatus(username,repo,workflow_id) {
+    //perform axios request to get workflows
+    //return the workflows
+    const request_workflow_status = await octokit.request('GET /repos/{owner}/{repo}/actions/workflows/{workflow_id}/runs', {
+        owner: username,
+        repo: repo,
+        workflow_id: workflow_id
+    });
+    return request_workflow_status.data;
+}
+
